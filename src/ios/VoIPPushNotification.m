@@ -54,7 +54,7 @@
     NSMutableDictionary* results = [NSMutableDictionary dictionaryWithCapacity:4];
     [results setObject:message forKey:@"alert"];
     [results setObject:notId forKey:@"notId"];
-    [results setObject:contentAvailable forKey:@"contentAvailable"];
+    [results setObject:contentAvailable forKey:@"content-available"];
     [results setObject:url forKey:@"url"];
     
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:results];
