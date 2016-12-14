@@ -41,15 +41,21 @@
 
 - (void)pushRegistry:(PKPushRegistry *)registry didReceiveIncomingPushWithPayload:(PKPushPayload *)payload forType:(NSString *)type
 {
-    NSDictionary *payloadDict = payload.dictionaryPayload[@"aps"];
+    NSDictionary *apsDict = payload.dictionaryPayload[@"aps"];
+    NSDictionary *payloadDict = payload.dictionaryPayload;
     NSLog(@"[objC] didReceiveIncomingPushWithPayload: %@", payloadDict);
 
-    NSString *message = payloadDict[@"alert"];
+    NSString *message = apsDict[@"alert"];
+    NSString *notId = payloadDict[@"notId"];
+    NSString *contentAvailable = apsDict[@"contentAvailable"];
+    NSString *url = payloadDict[@"url"];
     NSLog(@"[objC] received VoIP msg: %@", message);
 
-    NSMutableDictionary* results = [NSMutableDictionary dictionaryWithCapacity:2];
-    [results setObject:message forKey:@"function"];
-    [results setObject:@"someOtherDataForField" forKey:@"someOtherField"];
+    NSMutableDictionary* results = [NSMutableDictionary dictionaryWithCapacity:4];
+    [results setObject:message forKey:@"alert"];
+    [results setObject:notId forKey:@"notId"];
+    [results setObject:contentAvailable forKey:@"contentAvailable"];
+    [results setObject:url forKey:@"url"];
     
     CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:results];
     [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
