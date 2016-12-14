@@ -47,7 +47,7 @@
 
     NSString *message = apsDict[@"alert"];
     NSString *notId = payloadDict[@"notId"];
-    NSString *contentAvailable = apsDict[@"contentAvailable"];
+    NSString *contentAvailable = apsDict[@"content-available"];
     NSString *url = payloadDict[@"url"];
     NSLog(@"[objC] received VoIP msg: %@", message);
 
